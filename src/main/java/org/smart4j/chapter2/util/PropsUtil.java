@@ -13,7 +13,7 @@ import java.util.Properties;
  * Created by lenovo on 2016-12-23.
  */
 public final class PropsUtil {
-    private static final Logger LOGGER= LoggerFactory.getLogger(PropsUtil.class);
+    public static final Logger LOGGER= LoggerFactory.getLogger(PropsUtil.class);
 
     public static Properties loadProps(String fileName){
         Properties props=null;

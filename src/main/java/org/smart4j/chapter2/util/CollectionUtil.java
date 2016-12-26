@@ -1,5 +1,8 @@
 package org.smart4j.chapter2.util;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
+
 import java.util.Collection;
 import java.util.Map;
 

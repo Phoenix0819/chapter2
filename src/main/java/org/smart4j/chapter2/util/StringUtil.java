@@ -1,6 +1,8 @@
 package org.smart4j.chapter2.util;
 
-//import org.apache.commons.lang3.StringUtils;
+//import org.apache.*;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by lenovo on 2016-12-23.
