@@ -8,10 +8,8 @@ import org.smart4j.chapter2.model.Customer;
 import org.smart4j.chapter2.util.PropsUtil;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * Created by lenovo on 2016-12-22.
@@ -20,13 +18,9 @@ public class CustomerService {
     private static final Logger LOGGER= LoggerFactory.getLogger(PropsUtil.class);
 
     public List<Customer> getCustomerList (){
-        Connection connection=DataBaseHelper.getConnection();
-        try {
             String sql="select * from customer";
-            return DataBaseHelper.queryEntityList(Customer.class,connection,sql);
-        } finally {
-            DataBaseHelper.closeConneciton(connection);
-        }
+            return DataBaseHelper.queryEntityList(Customer.class,sql);
+
     }
 
     public  Customer getCustomer(long id){
