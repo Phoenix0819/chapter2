@@ -29,8 +29,7 @@ public class CustomerServiceTest {
         List<Customer> customerList=customerService.getCustomerList();
         for (Customer customer:customerList
              ) {
-            System.out.println( customer.getId());
-
+            System.out.println( customer.getId()+","+customer.getName()+","+customer.getContact());
         }
         Assert.assertEquals(2,customerList.size());
     }
@@ -39,12 +38,13 @@ public class CustomerServiceTest {
     public  void getCustomerTest(){
         long id=1;
         Customer customer=customerService.getCustomer(id);
+        System.out.println( customer.getId()+","+customer.getName()+","+customer.getContact());
         Assert.assertNotNull(customer);
     }
 
     @Test
     public void createCustomerTest(){
-        Map<String,Object> fieldMap=new HashMap<String, Object>();
+        Map<String,Object> fieldMap=new HashMap<>();
         fieldMap.put("name","customer100");
         fieldMap.put("contact","John");
         fieldMap.put("telephone","13512345678");
@@ -55,15 +55,15 @@ public class CustomerServiceTest {
     @Test
     public void updateCustomerTest(){
         long id=1;
-        Map<String,Object> fieldMap=new HashMap<String, Object>();
-        fieldMap.put("contract","Eric");
+        Map<String,Object> fieldMap=new HashMap<>();
+        fieldMap.put("contact","Eric");
         boolean result=customerService.updateCustomer(id,fieldMap);
         Assert.assertTrue(result);
     }
 
     @Test
     public void deleteCustomerTest(){
-        long id=1;
+        long id=3;
         boolean result=customerService.deleteCustomer(id);
         Assert.assertTrue(result);
     }

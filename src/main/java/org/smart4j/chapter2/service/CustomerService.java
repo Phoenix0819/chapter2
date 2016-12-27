@@ -29,17 +29,14 @@ public class CustomerService {
     }
 
     public boolean createCustomer(Map<String,Object> fieldMap){
-        //TODO
-        return false;
+        return DataBaseHelper.insertEntity(Customer.class,fieldMap);
     }
 
     public boolean updateCustomer(long id,Map<String,Object> fieldMap){
-        //TODO
-        return false;
+        return DataBaseHelper.updateEntity(Customer.class,id,fieldMap);
     }
 
     public boolean deleteCustomer(long id){
-        //TODO
-        return false;
+        return DataBaseHelper.deleteEntity(Customer.class,id);
     }
 }

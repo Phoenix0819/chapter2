@@ -1,5 +1,6 @@
 package org.smart4j.chapter2.helper;
 
+import com.sun.xml.internal.ws.spi.db.FieldSetter;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -7,6 +8,7 @@ import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.smart4j.chapter2.util.CollectionUtil;
 import org.smart4j.chapter2.util.PropsUtil;
 
 import java.sql.Connection;
@@ -126,5 +128,55 @@ public final class DataBaseHelper {
         return rows;
     }
 
-  //  public static <T> boolean insertEntity(Class<T>)
+    public static <T> boolean insertEntity(Class<T> entityClass,Map<String,Object> fieldMap){
+        if (CollectionUtil.isEmpty(fieldMap)){
+            LOGGER.error("can not insert entity:fieldMap is empty");
+            return false;
+        }else {
+            String sql="insert into "+getTableName(entityClass);
+            StringBuilder columns=new StringBuilder("(");
+            StringBuilder values=new StringBuilder("(");
+            for (String fieldName:fieldMap.keySet()){
+                columns.append(fieldName).append(",");
+                values.append("?,");
+            }
+            columns.replace(columns.lastIndexOf(","),columns.length(),")");
+            values.replace(values.lastIndexOf(","),values.length(),")");
+            sql+=columns+"VALUES"+values;
+
+            Object[] params= fieldMap.values().toArray();
+            return executeUpdate(sql,params)==1;
+        }
+    }
+
+    private static <T> String getTableName(Class<T> entityClass) {
+        return  entityClass.getSimpleName();
+    }
+
+    public static <T> boolean updateEntity(Class<T> entityClass,long id,Map<String,Object> fieldMap){
+        if (CollectionUtil.isEmpty(fieldMap)){
+            LOGGER.error("can not update entity:fieldMap is empty");
+            return false;
+        }else {
+            String sql="update "+getTableName(entityClass)+" set ";
+            StringBuilder columns=new StringBuilder();
+            for (String fieldName:fieldMap.keySet()){
+                columns.append(fieldName).append("=?, ");
+            }
+            sql+=columns.substring(0,columns.lastIndexOf(","))+" where id=?";
+            List<Object> paramList=new ArrayList<>();
+            paramList.addAll(fieldMap.values());
+            paramList.add(id);
+            Object[] params=paramList.toArray();
+
+            return executeUpdate(sql,params)==1;
+        }
+    }
+
+    public static <T> boolean deleteEntity(Class<T> entityClass,long id){
+        String sql="delete from "+getTableName(entityClass) +" where id =? ";
+        return executeUpdate(sql,id)==1;
+    }
+
+
 }
