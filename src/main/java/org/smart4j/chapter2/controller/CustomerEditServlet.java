@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by lenovo on 2016-12-22.
  */
-@WebServlet("/customer_create")
+@WebServlet("/customer_edit")
 public class CustomerEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
