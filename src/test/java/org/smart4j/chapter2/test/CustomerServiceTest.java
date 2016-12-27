@@ -27,11 +27,11 @@ public class CustomerServiceTest {
     @Test
     public void getCustomerListTest (){
         List<Customer> customerList=customerService.getCustomerList();
-        for (Customer customer:customerList
-             ) {
+        System.out.println(customerList.size());
+        for (Customer customer:customerList) {
             System.out.println( customer.getId()+","+customer.getName()+","+customer.getContact());
         }
-        Assert.assertEquals(2,customerList.size());
+        Assert.assertEquals(5,customerList.size());
     }
 
     @Test

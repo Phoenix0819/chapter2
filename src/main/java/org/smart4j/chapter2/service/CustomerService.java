@@ -15,7 +15,6 @@ import java.util.Map;
  * Created by lenovo on 2016-12-22.
  */
 public class CustomerService {
-    private static final Logger LOGGER= LoggerFactory.getLogger(PropsUtil.class);
 
     public List<Customer> getCustomerList (){
             String sql="select * from customer";
